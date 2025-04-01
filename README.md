@@ -278,3 +278,107 @@ This repository demonstrates, How you can Setup Hardhat Environment Using Docker
 ## Check out the Hardhat Setup Using Docker
 
 [GitHub Repository Link](https://github.com/prashantyadav008/Docker-Hardhat-Setup)
+
+## <br>
+
+## MongoDB Setup with Docker
+
+### Create and verify Docker network
+
+```sh
+docker network ls
+docker network create mongo-network
+```
+
+### Run MongoDB container
+
+```sh
+docker run -d \
+  -p 27017:27017 \
+  --name mongo \
+  --network mongo-network \
+  -e MONGO_INITDB_ROOT_USERNAME=root \
+  -e MONGO_INITDB_ROOT_PASSWORD=root123 \
+  mongo
+```
+
+### Check running containers
+
+```sh
+docker ps
+```
+
+### Run Mongo Express container
+
+```sh
+docker run -d \
+  -p 8081:8081 \
+  --name mongo-express \
+  --network mongo-network \
+  -e ME_CONFIG_MONGODB_ADMINUSERNAME=root \
+  -e ME_CONFIG_MONGODB_ADMINPASSWORD=root123 \
+  -e ME_CONFIG_MONGODB_URL="mongodb://root:root123@mongo:27017" \
+  mongo-express
+```
+
+### Access Mongo Express
+
+Hit the URL:
+[http://localhost:8081/](http://localhost:8081/)
+
+**Username:** admin  
+**Password:** pass
+
+---
+
+## Docker Compose for MongoDB Setup
+
+This `compose.yaml` file automates the network and container setup without manually pulling images and defining networks. Running this file will create and manage containers efficiently.
+
+### Start MongoDB and Mongo Express using Docker Compose
+
+```sh
+docker-compose -f mongodb.yaml up -d  # -d for detached mode
+```
+
+### Stop and remove containers
+
+```sh
+docker-compose -f mongodb.yaml down
+```
+
+---
+
+## Dockerizing Our Project
+
+### Important Dockerfile Instructions
+
+- `FROM`
+- `WORKDIR`
+- `COPY`
+- `RUN`
+- `CMD`
+- `EXPOSE`
+- `ENV`
+
+### Build and Run Docker Image
+
+```sh
+docker build -t docker-nodejs-setup .
+```
+
+### Check the repository using bash
+
+```sh
+docker run -it docker-nodejs-setup:1.0 bash
+```
+
+### Create a new build and upload to Docker Hub
+
+```sh
+# Build image
+docker build -t itsprashant008/docker-nodejs-setup .
+
+# Push to Docker Hub
+docker push itsprashant008/docker-nodejs-setup
+```
