@@ -179,7 +179,7 @@ docker stop <container_name>
 
 # or
 
-docker exec -it <container_name> sh
+    docker exec -it <container_name> sh
 
 ---
 
@@ -199,7 +199,7 @@ docker exec -it <container_name> sh
 
 # or
 
-docker login
+    docker login
 
 _To logout:_
 
