@@ -19,3 +19,11 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root123
       ME_CONFIG_MONGODB_URL: mongodb://root:root123@mongo:27017
+
+  itsprashant008/docker-nodejs-setup:
+    image: itsprashant008/docker-nodejs-setup
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_DB_USERNAME: admin
+      MONGO_DB_PASSWORD: pass
